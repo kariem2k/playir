@@ -1,0 +1,1 @@
+ndk-gdb --force --verbose

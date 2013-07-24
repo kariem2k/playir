@@ -1,0 +1,4 @@
+Custom folder containing scripts and libs to be used with the ndk-build command.
+
+copy_assets.sh - Copies resources into the res folder.
+copy_libs.sh - Copies private NDK libs into the libs folder.
