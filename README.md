@@ -1,7 +1,7 @@
 Description
 ===========
 Multi is a hybrid multi-platform 3d multiplayer games engine that's built to be editable in real-time.
-For more information on the Phone Wars game visit http://multiplay.io/
+For more information visit http://multiplay.io/
 
 
 Licence
