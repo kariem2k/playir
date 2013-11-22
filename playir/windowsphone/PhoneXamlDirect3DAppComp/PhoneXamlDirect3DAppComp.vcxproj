@@ -64,7 +64,7 @@
     <GenerateManifest>false</GenerateManifest>
   </PropertyGroup>
   <PropertyGroup>
-    <IncludePath>$(SolutionDir)..\App\Source;$(SolutionDir)..\App\Source\game;$(SolutionDir)..\App\Source\multi;$(SolutionDir)..\App\Source\scenes;$(SolutionDir)..\App\Source\ui;$(SolutionDir)..\Engine\Source;$(SolutionDir)..\Engine\Source\AI;$(SolutionDir)..\Engine\Source\js;$(SolutionDir)..\Engine\Source\Objects;$(SolutionDir)..\Engine\Source\Rendering;$(SolutionDir)..\Engine\Source\Scenes;$(SolutionDir)..\Engine\Source\Tools;$(SolutionDir)Engine\Source\Windows;$(SolutionDir)..\External\3dsloader;$(SolutionDir)..\External\jansson-2.3.1\src;$(SolutionDir)..\External\ObjLoader3;$(IncludePath)</IncludePath>
+    <IncludePath>$(SolutionDir)..\App\Source;$(SolutionDir)..\App\Source\game;$(SolutionDir)..\App\Source\multi;$(SolutionDir)..\App\Source\scenes;$(SolutionDir)..\App\Source\ui;$(SolutionDir)..\Engine\Source;$(SolutionDir)..\Engine\Source\AI;$(SolutionDir)..\Engine\Source\js;$(SolutionDir)..\Engine\Source\Objects;$(SolutionDir)..\Engine\Source\Rendering;$(SolutionDir)..\Engine\Source\Scenes;$(SolutionDir)..\Engine\Source\Tools;$(SolutionDir)Engine\Source\Windows;$(SolutionDir)..\External\3dsloader;$(SolutionDir)..\External\jansson-2.5\src;$(SolutionDir)..\External\ObjLoader3;$(IncludePath)</IncludePath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <IntDir>$(SolutionDir)Bin\$(Platform)\$(Configuration)\obj\</IntDir>

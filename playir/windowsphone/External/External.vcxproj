@@ -57,7 +57,7 @@
     <GenerateManifest>false</GenerateManifest>
   </PropertyGroup>
   <PropertyGroup>
-    <IncludePath>$(SolutionDir)..\Engine\Source\AI;$(SolutionDir)..\Engine\Source\js;$(SolutionDir)..\Engine\Source\Objects;$(SolutionDir)..\Engine\Source\Rendering;$(SolutionDir)..\Engine\Source\Scenes;$(SolutionDir)..\Engine\Source\Tools;$(SolutionDir)Engine\Source\Windows;$(SolutionDir)..\External\3dsloader;$(SolutionDir)..\External\jansson-2.3.1\src;$(SolutionDir)..\External\libjpeg-8d;$(SolutionDir)..\External\libpng;$(SolutionDir)..\External\ObjLoader3;$(SolutionDir)..\External\zlib-1.2.3;$(IncludePath)</IncludePath>
+    <IncludePath>$(SolutionDir)..\Engine\Source\AI;$(SolutionDir)..\Engine\Source\js;$(SolutionDir)..\Engine\Source\Objects;$(SolutionDir)..\Engine\Source\Rendering;$(SolutionDir)..\Engine\Source\Scenes;$(SolutionDir)..\Engine\Source\Tools;$(SolutionDir)Engine\Source\Windows;$(SolutionDir)..\External\3dsloader;$(SolutionDir)..\External\jansson-2.5\src;$(SolutionDir)..\External\libjpeg-8d;$(SolutionDir)..\External\libpng;$(SolutionDir)..\External\ObjLoader3;$(SolutionDir)..\External\zlib-1.2.3;$(IncludePath)</IncludePath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <IntDir>$(SolutionDir)Bin\$(Platform)\$(Configuration)\obj\</IntDir>
@@ -128,7 +128,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClInclude Include="..\..\External\3dsloader\*.h" />
-    <ClInclude Include="..\..\External\jansson-2.3.1\src\*.h" />
+    <ClInclude Include="..\..\External\jansson-2.5\src\*.h" />
     <ClInclude Include="..\..\External\libjpeg-8d\*.h" />
     <ClInclude Include="..\..\External\libpng\*.h" />
     <ClInclude Include="..\..\External\ObjLoader3\*.h" />
@@ -137,7 +137,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\External\3dsloader\*.cpp" />
-    <ClCompile Include="..\..\External\jansson-2.3.1\src\*.c" />
+    <ClCompile Include="..\..\External\jansson-2.5\src\*.c" />
     <ClCompile Include="..\..\External\libjpeg-8d\*.c" />
     <ClCompile Include="..\..\External\libpng\*.c" />
     <ClCompile Include="..\..\External\ObjLoader3\*.cpp" />
