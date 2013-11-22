@@ -15,7 +15,7 @@ fi
 
 # Then copy the files
 cp icon114.png res/raw/icon.png
-cp assets/_android.html res/raw/_android.html
+cp assets/_native.html res/raw/_native.html
 cp -r ../../engine/resources/ res/raw/
 cp -r ../../app/resources/ res/raw/
 cp -r ../../resources/ res/raw/

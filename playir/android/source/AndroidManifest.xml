@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.softpoetry.multi"
+    package="com.playir.exampleapp"
     android:versionName="1.4.0"
     android:versionCode="27"
     android:installLocation="preferExternal">
@@ -19,8 +19,8 @@
     <uses-permission android:name="com.android.vending.BILLING" />
 
     <!-- GCM -->
-    <permission android:name="com.softpoetry.multi.permission.C2D_MESSAGE" android:protectionLevel="signature" />
-	<uses-permission android:name="com.softpoetry.multi.permission.C2D_MESSAGE" />
+    <permission android:name="com.playir.exampleapp.permission.C2D_MESSAGE" android:protectionLevel="signature" />
+	<uses-permission android:name="com.playir.exampleapp.permission.C2D_MESSAGE" />
 	<uses-permission android:name="com.google.android.c2dm.permission.RECEIVE" />
 	<uses-permission android:name="android.permission.GET_ACCOUNTS" />
 	<uses-permission android:name="android.permission.WAKE_LOCK" />
@@ -48,7 +48,7 @@
 			<intent-filter>
     			<action android:name="com.google.android.c2dm.intent.RECEIVE" />
     			<action android:name="com.google.android.c2dm.intent.REGISTRATION" />
-    			<category android:name="com.softpoetry.multi" />
+    			<category android:name="com.playir.exampleapp" />
   			</intent-filter>
 		</receiver>
 
