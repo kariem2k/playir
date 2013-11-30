@@ -12,6 +12,10 @@
 #include "CCFileManager.h"
 
 
+CCText LAUNCH_APP_ID = "multi";        // The launch app ID
+CCText CURRENT_APP_ID = LAUNCH_APP_ID;  // The current running app ID
+
+
 #if defined WP8
 static CCText PackagedJSFile = "..\\_native.html";
 #else
@@ -30,22 +34,8 @@ const char *_PLAYIR_SERVER_URL = _PLAYIR_SERVER_LOCAL_URL;
 const char *_PLAYIR_SERVER_URL = "http://playir.com/";
 #endif
 
-#ifdef FOODFIGHTERS
-CCText APPLE_APPID = "543797009";
-CCText ANDROID_APPID = "MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAsmGpJPX9tZSsGgEk+c8bNSxvTttMszYi6QInekpp1TUNn9IPtvuq+GD0i3l/+UwL6Zvw21bhORIEfpunXelcaLUrpbar1xto8fIxltCPURJmbFa6f699O6nfeSS3Ujvl/C6syUcgHr62uBDsexCkTOuZAr/kTjmwFUlrhIGdkjtw0BqsON+s5od5F0O1hc1StF042mRFl+FB28wF3iomU/m/iWQ/NeNEVjiwaM83u54Z8eyeZk+ZO47BvtdOZj6QcUF5IAvOF20BNPAxatLWWxfSOKaPvWDlEm5vRl4OAlfGRWJRckXWg8VGOUvbbCfHVHrH5OjIq/5/egtL5nazCQIDAQAB";
-#elif TANKLEGENDS
-CCText APPLE_APPID = "554850461";
-CCText ANDROID_APPID = "MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAsmGpJPX9tZSsGgEk+c8bNSxvTttMszYi6QInekpp1TUNn9IPtvuq+GD0i3l/+UwL6Zvw21bhORIEfpunXelcaLUrpbar1xto8fIxltCPURJmbFa6f699O6nfeSS3Ujvl/C6syUcgHr62uBDsexCkTOuZAr/kTjmwFUlrhIGdkjtw0BqsON+s5od5F0O1hc1StF042mRFl+FB28wF3iomU/m/iWQ/NeNEVjiwaM83u54Z8eyeZk+ZO47BvtdOZj6QcUF5IAvOF20BNPAxatLWWxfSOKaPvWDlEm5vRl4OAlfGRWJRckXWg8VGOUvbbCfHVHrH5OjIq/5/egtL5nazCQIDAQAB";
-#elif WORLDOFFIGHTERS
-CCText APPLE_APPID = "659871834";
-CCText ANDROID_APPID = "MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAhgOBoHJyT/S0LXAYqflUW/SlWD0igFz2MkYJDE/QvTJCEj64dO7vcmfgysZXlt5YmoluYjexTQo7g3M9amHtMOp0rwCRZYLkueBntwEblC36HIqFNYn7nZKEzs8ueYbPQOI/zkmK6NTOxdTNIBZ4IBedSHAaFt82vTAH05+6sCHjyg7DY9sh/TQ8s33JDOk1XNtikzD/L5A0AsZvGH45L0Cz1O8IPoMbs10f39+CjxTB01gqnDFKCutKST6TrGlSIwIHPdsykRNa3pjMclXqI5RHutWqn73Su6wzlSV50xzVkmm00/8gETbDcmYTEut/ZMRKcl3hC06k6VU4ybSIaQIDAQAB";
-#else
-CCText APPLE_APPID = "602607720";
-CCText ANDROID_APPID = "MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAsmGpJPX9tZSsGgEk+c8bNSxvTttMszYi6QInekpp1TUNn9IPtvuq+GD0i3l/+UwL6Zvw21bhORIEfpunXelcaLUrpbar1xto8fIxltCPURJmbFa6f699O6nfeSS3Ujvl/C6syUcgHr62uBDsexCkTOuZAr/kTjmwFUlrhIGdkjtw0BqsON+s5od5F0O1hc1StF042mRFl+FB28wF3iomU/m/iWQ/NeNEVjiwaM83u54Z8eyeZk+ZO47BvtdOZj6QcUF5IAvOF20BNPAxatLWWxfSOKaPvWDlEm5vRl4OAlfGRWJRckXWg8VGOUvbbCfHVHrH5OjIq/5/egtL5nazCQIDAQAB";
-#endif
-
-CCText GAMEINFO_APPID = "multi";        // The launch app ID
-CCText CURRENT_APPID = GAMEINFO_APPID;  // The current running app ID
+CCText APPLE_APP_ID = "602607720";
+CCText ANDROID_APP_ID = "MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAsmGpJPX9tZSsGgEk+c8bNSxvTttMszYi6QInekpp1TUNn9IPtvuq+GD0i3l/+UwL6Zvw21bhORIEfpunXelcaLUrpbar1xto8fIxltCPURJmbFa6f699O6nfeSS3Ujvl/C6syUcgHr62uBDsexCkTOuZAr/kTjmwFUlrhIGdkjtw0BqsON+s5od5F0O1hc1StF042mRFl+FB28wF3iomU/m/iWQ/NeNEVjiwaM83u54Z8eyeZk+ZO47BvtdOZj6QcUF5IAvOF20BNPAxatLWWxfSOKaPvWDlEm5vRl4OAlfGRWJRckXWg8VGOUvbbCfHVHrH5OjIq/5/egtL5nazCQIDAQAB";
 
 
 CCAppEngine::CCAppEngine()
@@ -108,7 +98,7 @@ void CCAppEngine::start()
 #endif
 
 #if defined( ANDROID ) && !defined( NOGOOGLE )
-    CCJNI::GoogleServicesRegister( ANDROID_APPID.buffer );
+    CCJNI::GoogleServicesRegister( ANDROID_APP_ID.buffer );
 #endif
 
     serverConnect();
@@ -249,7 +239,7 @@ void CCAppEngine::restartLauncher()
 {
     if( jsEngine != NULL )
     {
-        CURRENT_APPID = "multi";
+        CURRENT_APP_ID = "multi";
         CCLAMBDA_RUN_ENGINETHREAD( gEngine->reloadLastJSEngine(); );
     }
 }
@@ -341,9 +331,9 @@ bool CCAppEngine::shouldHandleBackButton()
 
 	if( !backButtonActionPending )
 	{
-		if( !CCText::Equals( CURRENT_APPID, GAMEINFO_APPID ) )
+		if( !CCText::Equals( CURRENT_APP_ID, LAUNCH_APP_ID ) )
 		{
-            CURRENT_APPID = GAMEINFO_APPID;
+            CURRENT_APP_ID = LAUNCH_APP_ID;
             CCLAMBDA_RUN_ENGINETHREAD( gEngine->restart(); );
             return true;
 		}
@@ -536,51 +526,62 @@ void CCAppEngine::webJSLoaded(CCList<CCText> &text)
 			CCAppManager::WebJSRunJavaScript( script.buffer, false, true );
 #endif
 
-        if( CCFileManager::DoesFileExist( "gameinfo.json", Resource_Packaged ) )
+        if( CCFileManager::DoesFileExist( "appinfo.json", Resource_Packaged ) )
         {
-            CCText gameinfo;
-            CCFileManager::GetFile( "gameinfo.json", gameinfo, Resource_Packaged );
+            CCText appinfo;
+            CCFileManager::GetFile( "appinfo.json", appinfo, Resource_Packaged );
 
             // Get app ID
             json_error_t error;
-            json_t *root = json_loads( gameinfo.buffer, 0, &error );
+            json_t *root = json_loads( appinfo.buffer, 0, &error );
             if( root )
             {
-				json_object_string( GAMEINFO_APPID, root, "id", false );
-				json_object_string( APPLE_APPID, root, "APPLE_APPID", false );
-				json_object_string( ANDROID_APPID, root, "ANDROID_APPID", false );
+				json_object_string( LAUNCH_APP_ID, root, "id", false );
+
+                CCText result;
+				json_object_string( result, root, "APPLE_APP_ID", false );
+                if( result.length > 0 )
+                {
+                    APPLE_APP_ID = result;
+                }
+
+                json_object_string( result, root, "ANDROID_APP_ID", false );
+                if( result.length > 0 )
+                {
+                    ANDROID_APP_ID = result;
+                }
+
                 json_decref( root );
             }
 
-            // Feed in the APP_ID for use with the sceneitemshop for in app purchases
-            script = "CCEngine.APP_ID = \"";
-			script += GAMEINFO_APPID;
+            script = "window.LAUNCH_APP_ID = \"";
+			script += LAUNCH_APP_ID;
 			script += "\";";
 			CCAppManager::WebJSRunJavaScript( script.buffer, false, true );
 
-			script = "CCEngine.LoadGameInfo( ";
-			script += gameinfo.buffer;
+			script = "CCEngine.LoadAppInfo( ";
+			script += appinfo.buffer;
 			script += " );";
 			CCAppManager::WebJSRunJavaScript( script.buffer, false, true );
 
             if( firstRun )
             {
             	firstRun = false;
-				CURRENT_APPID = GAMEINFO_APPID;
+				CURRENT_APP_ID = LAUNCH_APP_ID;
 			}
         }
 
 #ifdef DEBUGON
-//        CURRENT_APPID = "33";
+//        CURRENT_APP_ID = "33";
 #endif
 
 //        if( urlSchemeUpdated )
         {
 //            urlSchemeUpdated = false;
             CCText script;
-            // TODO: In future delete CLIENT_ID
-            script = "window.APP_ID = window.CLIENT_ID = \"";
-            script += CURRENT_APPID.buffer;
+
+            script = "window.APP_ID = \"";
+            script += CURRENT_APP_ID.buffer;
             script += "\";";
             CCAppManager::WebJSRunJavaScript( script.buffer, false, true );
         }

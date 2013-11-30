@@ -32,8 +32,7 @@
 
 extern const char *_PLAYIR_SERVER_URL;
 
-extern CCText CURRENT_APPID;
-extern CCText APPLE_APPID;
+extern CCText CURRENT_APP_ID;
 
 class CCTextCallback;
 

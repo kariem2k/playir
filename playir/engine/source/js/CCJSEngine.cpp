@@ -1935,7 +1935,7 @@ void CCJSEngine::processUpdateCommands(CCText &jsCommands)
             CCASSERT( parameters.length == 2 );
             if( parameters.length == 2 )
             {
-                CURRENT_APPID = parameters.list[1];
+                CURRENT_APP_ID = parameters.list[1];
                 gEngine->urlSchemeUpdate();
             }
         }

@@ -47,7 +47,7 @@
                 CCText value = [nsString UTF8String];
                 value.splitAfter( value, "multi://" );
 
-                CURRENT_APPID = value.buffer;
+                CURRENT_APP_ID = value.buffer;
                 if( gEngine != NULL )
                 {
                     gEngine->urlSchemeUpdate();
@@ -55,7 +55,7 @@
             }
         }
     }
-    
+
     return true;
 }
 
@@ -68,7 +68,7 @@
         CCText value = [nsString UTF8String];
         value.splitAfter( value, "multi://" );
 
-        CURRENT_APPID = value.buffer;
+        CURRENT_APP_ID = value.buffer;
         if( gEngine != NULL )
         {
             gEngine->urlSchemeUpdate();
