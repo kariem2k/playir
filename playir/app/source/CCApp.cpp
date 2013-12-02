@@ -34,7 +34,7 @@ const char *_PLAYIR_SERVER_URL = _PLAYIR_SERVER_LOCAL_URL;
 const char *_PLAYIR_SERVER_URL = "http://playir.com/";
 #endif
 
-CCText APPLE_APP_ID = "602607720";
+CCText IOS_APP_ID = "602607720";
 CCText ANDROID_APP_ID = "MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAsmGpJPX9tZSsGgEk+c8bNSxvTttMszYi6QInekpp1TUNn9IPtvuq+GD0i3l/+UwL6Zvw21bhORIEfpunXelcaLUrpbar1xto8fIxltCPURJmbFa6f699O6nfeSS3Ujvl/C6syUcgHr62uBDsexCkTOuZAr/kTjmwFUlrhIGdkjtw0BqsON+s5od5F0O1hc1StF042mRFl+FB28wF3iomU/m/iWQ/NeNEVjiwaM83u54Z8eyeZk+ZO47BvtdOZj6QcUF5IAvOF20BNPAxatLWWxfSOKaPvWDlEm5vRl4OAlfGRWJRckXWg8VGOUvbbCfHVHrH5OjIq/5/egtL5nazCQIDAQAB";
 
 
@@ -526,6 +526,19 @@ void CCAppEngine::webJSLoaded(CCList<CCText> &text)
 			CCAppManager::WebJSRunJavaScript( script.buffer, false, true );
 #endif
 
+        {
+            const float frameBufferWidth = gRenderer->frameBufferManager.getWidth( -1 );
+            const float frameBufferHeight = gRenderer->frameBufferManager.getHeight( -1 );
+            script = "nativeSetup( \"";
+            script += CCEngine::DeviceType.buffer;
+            script += "\", ";
+            script += frameBufferWidth;
+            script += ", ";
+            script += frameBufferHeight;
+            script += " );";
+            CCAppManager::WebJSRunJavaScript( script.buffer, false, true );
+        }
+
         if( CCFileManager::DoesFileExist( "appinfo.json", Resource_Packaged ) )
         {
             CCText appinfo;
@@ -539,10 +552,10 @@ void CCAppEngine::webJSLoaded(CCList<CCText> &text)
 				json_object_string( LAUNCH_APP_ID, root, "id", false );
 
                 CCText result;
-				json_object_string( result, root, "APPLE_APP_ID", false );
+				json_object_string( result, root, "IOS_APP_ID", false );
                 if( result.length > 0 )
                 {
-                    APPLE_APP_ID = result;
+                    IOS_APP_ID = result;
                 }
 
                 json_object_string( result, root, "ANDROID_APP_ID", false );
@@ -553,11 +566,6 @@ void CCAppEngine::webJSLoaded(CCList<CCText> &text)
 
                 json_decref( root );
             }
-
-            script = "window.LAUNCH_APP_ID = \"";
-			script += LAUNCH_APP_ID;
-			script += "\";";
-			CCAppManager::WebJSRunJavaScript( script.buffer, false, true );
 
 			script = "CCEngine.LoadAppInfo( ";
 			script += appinfo.buffer;

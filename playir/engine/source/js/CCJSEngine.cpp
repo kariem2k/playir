@@ -33,20 +33,11 @@ CCJSEngine::CCJSEngine()
 
 void CCJSEngine::startup()
 {
-    const float frameBufferWidth = gRenderer->frameBufferManager.getWidth( -1 );
-    const float frameBufferHeight = gRenderer->frameBufferManager.getHeight( -1 );
-
     jsUpdateRunning = true;
 	jsUpdateTime = gEngine->time.lifetime;
 
     CCText script;
-    script = "nativeStart( \"";
-    script += CCEngine::DeviceType.buffer;
-    script += "\", ";
-    script += frameBufferWidth;
-    script += ", ";
-    script += frameBufferHeight;
-    script += " );";
+    script = "nativeStart();";
     CCAppManager::WebJSRunJavaScript( script.buffer, true, true );
 
     if( CCAppManager::GetOrientation().current != 0.0f || CCAppManager::GetOrientation().target != 0.0f )

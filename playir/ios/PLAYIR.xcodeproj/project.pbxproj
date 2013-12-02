@@ -191,7 +191,6 @@
 		4A7C57F6183EBC4800AABA05 /* tanklegends_title.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 4A7C56BD183EBC4800AABA05 /* tanklegends_title.jpg */; };
 		4A7C57F9183EBC4800AABA05 /* PressStartK.data in Resources */ = {isa = PBXBuildFile; fileRef = 4A7C56C0183EBC4800AABA05 /* PressStartK.data */; };
 		4A7C57FC183EBC4800AABA05 /* PressStartK.png in Resources */ = {isa = PBXBuildFile; fileRef = 4A7C56C1183EBC4800AABA05 /* PressStartK.png */; };
-		4A7C57FF183EBC4800AABA05 /* Thumbs.db in Resources */ = {isa = PBXBuildFile; fileRef = 4A7C56C2183EBC4800AABA05 /* Thumbs.db */; };
 		4A7C5802183EBC4800AABA05 /* fx_character_highlight_texture.png in Resources */ = {isa = PBXBuildFile; fileRef = 4A7C56C4183EBC4800AABA05 /* fx_character_highlight_texture.png */; };
 		4A7C5805183EBC4800AABA05 /* fx_character_shooting_texture.png in Resources */ = {isa = PBXBuildFile; fileRef = 4A7C56C5183EBC4800AABA05 /* fx_character_shooting_texture.png */; };
 		4A7C5808183EBC4800AABA05 /* fx_impact_texture.png in Resources */ = {isa = PBXBuildFile; fileRef = 4A7C56C6183EBC4800AABA05 /* fx_impact_texture.png */; };
@@ -221,7 +220,6 @@
 		4A7C5850183EBC4800AABA05 /* profile_poker.png in Resources */ = {isa = PBXBuildFile; fileRef = 4A7C56E1183EBC4800AABA05 /* profile_poker.png */; };
 		4A7C5853183EBC4800AABA05 /* profile_rich.png in Resources */ = {isa = PBXBuildFile; fileRef = 4A7C56E2183EBC4800AABA05 /* profile_rich.png */; };
 		4A7C5856183EBC4800AABA05 /* profile_troll.png in Resources */ = {isa = PBXBuildFile; fileRef = 4A7C56E3183EBC4800AABA05 /* profile_troll.png */; };
-		4A7C5859183EBC4800AABA05 /* Thumbs.db in Resources */ = {isa = PBXBuildFile; fileRef = 4A7C56E4183EBC4800AABA05 /* Thumbs.db */; };
 		4A7C585C183EBC4800AABA05 /* ui_fight.png in Resources */ = {isa = PBXBuildFile; fileRef = 4A7C56E6183EBC4800AABA05 /* ui_fight.png */; };
 		4A7C585F183EBC4800AABA05 /* ui_fire_charge.png in Resources */ = {isa = PBXBuildFile; fileRef = 4A7C56E7183EBC4800AABA05 /* ui_fire_charge.png */; };
 		4A7C5862183EBC4800AABA05 /* ui_fire_icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 4A7C56E8183EBC4800AABA05 /* ui_fire_icon.png */; };
@@ -393,7 +391,7 @@
 		4A10538917F4F8390029FA2A /* CCURLManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CCURLManager.h; sourceTree = "<group>"; };
 		4A10538A17F4F8390029FA2A /* CCVectors.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = CCVectors.cpp; sourceTree = "<group>"; };
 		4A10538B17F4F8390029FA2A /* CCVectors.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CCVectors.h; sourceTree = "<group>"; };
-		4A10538C17F4F8390029FA2A /* .DS_Store */ = {isa = PBXFileReference; lastKnownFileType = file; name = .DS_Store; path = ../../engine/source/.DS_Store; sourceTree = "<group>"; };
+		4A10538C17F4F8390029FA2A /* .DS_Store */ = {isa = PBXFileReference; lastKnownFileType = text; name = .DS_Store; path = ../../engine/source/.DS_Store; sourceTree = "<group>"; };
 		4A10538D17F4F8390029FA2A /* CCAppManager.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp; fileEncoding = 4; name = CCAppManager.cpp; path = ../../engine/source/CCAppManager.cpp; sourceTree = "<group>"; };
 		4A10538E17F4F8390029FA2A /* CCAppManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CCAppManager.h; path = ../../engine/source/CCAppManager.h; sourceTree = "<group>"; };
 		4A10538F17F4F8390029FA2A /* CCDefines.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CCDefines.h; path = ../../engine/source/CCDefines.h; sourceTree = "<group>"; };
@@ -1536,7 +1534,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				4A7C5859183EBC4800AABA05 /* Thumbs.db in Resources */,
 				4A7C577B183EBC4800AABA05 /* androBot_body.obj in Resources */,
 				4A7C57F3183EBC4800AABA05 /* tanklegends_helpscreen.jpg in Resources */,
 				4A7C586E183EBC4800AABA05 /* ui_lose.png in Resources */,
@@ -1586,7 +1583,6 @@
 				4A7C580E183EBC4800AABA05 /* fx_weapon_bullet_diffuse.jpg in Resources */,
 				4A7C589B183EBC4800AABA05 /* ui_button_battleroyale.png in Resources */,
 				4A7C583B183EBC4800AABA05 /* icon_twitter.png in Resources */,
-				4A7C57FF183EBC4800AABA05 /* Thumbs.db in Resources */,
 				4A7C572A183EBC4800AABA05 /* editor_tile_background.jpg in Resources */,
 				4A7C5757183EBC4800AABA05 /* bazooka.obj in Resources */,
 				4A7C5889183EBC4800AABA05 /* icon_store_googleplay.png in Resources */,

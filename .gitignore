@@ -1,5 +1,9 @@
+.DS_Store
+Thumbs.db
+
 */*/*.xcodeproj/project.xcworkspace/
-*/*/*.xcodeproj/xcuserdata/
+*/*/*.xcodepro
+*/*/*/xcuserdata/
 
 */Qt/*-build-*/
 */Qt/Project/*.pro.user*

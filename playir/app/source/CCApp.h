@@ -28,7 +28,7 @@
 //#define _PLAYIR_DEBUG_JSNOUPDATE		// Don't use new js downloaded from the server
 #endif
 //#define PROFILEON
-#define _PLAYER_JSENGINEVERSION "5"
+#define _PLAYER_JSENGINEVERSION "6"
 
 extern const char *_PLAYIR_SERVER_URL;
 
