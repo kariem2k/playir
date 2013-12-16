@@ -23,12 +23,9 @@ CCTextureHandle::~CCTextureHandle()
 
 CCTextureManager::CCTextureManager()
 {
-	currentGLTexture = NULL;
-    totalTexturesLoaded = 0;
-    totalUsedTextureSpace = 0;
     textureSprites = new CCTextureSprites();
 
-	CCDefaultTexCoords();
+    invalidateAllTextureHandles();
 }
 
 
@@ -47,6 +44,10 @@ CCTextureManager::~CCTextureManager()
 
 void CCTextureManager::invalidateAllTextureHandles()
 {
+    currentGLTexture = NULL;
+    totalTexturesLoaded = 0;
+    totalUsedTextureSpace = 0;
+
     for( int i=0; i<textureHandles.length; ++i )
     {
         CCTextureHandle *handle = textureHandles.list[i];
@@ -57,6 +58,10 @@ void CCTextureManager::invalidateAllTextureHandles()
             handle->texture = NULL;
         }
     }
+
+    // Load in a 1x1 white texture to use for untextured draws
+    assignTextureIndex( "transparent.png", Resource_Packaged, false, true, true );
+    assignTextureIndex( "white.png", Resource_Packaged, false, true, true );
 
     setTextureIndex( 0 );
 
@@ -212,7 +217,7 @@ void CCTextureManager::loadTextureAsync(CCTextureHandle &textureHandle, CCLambda
     {
         textureHandle.onLoad.add( callback );
     }
-    
+
     if( textureHandle.loading )
     {
         return;
@@ -222,7 +227,7 @@ void CCTextureManager::loadTextureAsync(CCTextureHandle &textureHandle, CCLambda
 #if defined PROFILEON
     CCProfiler profile( "CCTextureManager::loadTexture()" );
 #endif
-    
+
 #ifdef DEBUGON
     CCText debug = "CCTextureManager::loadTexture ";
     debug += textureHandle.filePath.buffer;
@@ -314,13 +319,13 @@ void CCTextureManager::loadedTexture(CCTextureHandle &textureHandle, CCTextureBa
 #ifdef WP8
     const uint maxSpace = 32 * 1024 * 1024;
 #else
-    const uint maxSpace = 42 * 1024 * 1024;
+    const uint maxSpace = 64 * 1024 * 1024;
 #endif
     if( totalUsedTextureSpace > maxSpace )
     {
         trim();
     }
-    
+
     textureHandle.texture = texture;
 }
 
@@ -332,7 +337,7 @@ void CCTextureManager::trim()
 #ifdef WP8
     const uint targetSpace = 24 * 1024 * 1024;
 #else
-    const uint targetSpace = 32 * 1024 * 1024;
+    const uint targetSpace = 42 * 1024 * 1024;
 #endif
     while( totalUsedTextureSpace > targetSpace )
     {
@@ -405,7 +410,7 @@ void CCTextureManager::bindTexture(const CCTextureName *texture)
 	{
         if( texture != NULL )
         {
-            GLBindTexture( GL_TEXTURE_2D, texture );
+            gRenderer->GLBindTexture( GL_TEXTURE_2D, texture );
         }
 		currentGLTexture = texture;
 	}

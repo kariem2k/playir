@@ -117,7 +117,7 @@ void CCTextureFontPage::renderText(const char *text, const uint length,
 			bindTexturePage();
 			CCSetTexCoords( mesh->uvs );
 			GLVertexPointer( 3, GL_FLOAT, 0, mesh->vertices, mesh->vertexCount );
-			GLDrawArrays( GL_TRIANGLES, 0, mesh->vertexCount );
+			gRenderer->GLDrawArrays( GL_TRIANGLES, 0, mesh->vertexCount );
 		}
 		GLPopMatrix();
 	}

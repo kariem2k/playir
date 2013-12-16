@@ -47,6 +47,8 @@ CCObjectText::CCObjectText(const long jsID)
     shader = NULL;      // No shaders yet
     centered = true;
     endMarker = false;
+
+    parent = NULL;
 }
 
 

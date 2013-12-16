@@ -22,10 +22,7 @@ enum CCRenderFlags
 {
     render_all				= 0x000000001,
     render_collisionBoxes	= 0x000000002,
-    render_collisionTrees	= 0x000000004,
-    render_pathFinder		= 0x000000008,
-    render_noPyramids		= 0x000000010,
-    render_fontPage         = 0x000000012
+    render_collisionTrees	= 0x000000004
 };
 
 enum CCRenderPass
@@ -105,6 +102,9 @@ protected:
     CCList<CCShader> shaders;
     bool usingOpenGL2;
 
+    float viewportX, viewportY, viewportWidth, viewportHeight;
+    float scissorX, scissorY, scissorWidth, scissorHeight;
+
 public:
     CCFrameBufferManager frameBufferManager;
 	uint renderFlags;
@@ -147,7 +147,26 @@ public:
 
     virtual void bind();
     void clear(const bool colour);
+
     virtual void GLClear(const bool colour);
+	virtual void GLViewport(const GLint x, const GLint y, const GLsizei width, const GLsizei height);
+	virtual void GLScissor(const GLint x, const GLint y, const GLsizei width, const GLsizei height);
+	virtual void GLEnable(const GLenum cap);
+	virtual void GLDisable(const GLenum cap);
+
+	virtual void GLCullFace(const GLenum mode);
+
+	virtual void GLBindTexture(const GLenum mode, const CCTextureName *texture);
+
+	virtual void GLDrawArrays(GLenum mode, GLint first, GLsizei count);
+	virtual void GLDrawElements(GLenum mode, GLsizei count, GLenum type, const void *indices);
+
+	virtual void GLVertexAttribPointer(uint index, int size, GLenum type, bool normalized, int stride, const void *pointer, const GLsizei count);
+
+	virtual void GLUniform3fv(int location, int count, const GLfloat *value);
+	virtual void GLUniform4fv(int location, int count, const GLfloat *value);
+	virtual void GLUniformMatrix4fv(int location, int count, bool transpose, const GLfloat value[4][4]);
+
     virtual void resolve() {};
 
 protected:
@@ -203,32 +222,13 @@ extern CCRenderer *gRenderer;
 
 extern void CCSetModelViewProjectionMatrix();
 
-// Attempt to simulate OpenGL interface to shaders
-extern void GLViewport(const GLint x, const GLint y, const GLsizei width, const GLsizei height);
-extern void GLScissor(const GLint x, const GLint y, const GLsizei width, const GLsizei height);
-extern void GLEnable(const GLenum cap);
-extern void GLDisable(const GLenum cap);
-extern void GLCullFace(const GLenum mode);
-extern void GLBindTexture(const GLenum mode, const class CCTextureName *texture);
-
-extern void GLDrawArrays(GLenum mode, GLint first, GLsizei count);
-extern void GLDrawElements(GLenum mode, GLsizei count, GLenum type, const void *indices);
-
 extern void GLVertexPointer(GLint size, GLenum type, GLsizei stride, const GLvoid *pointer, const GLsizei count);
 extern void GLTexCoordPointer(GLint size, GLenum type, GLsizei stride, const GLvoid *pointer);
 extern void GLColor4f(GLfloat r, GLfloat g, GLfloat b, GLfloat a);
 
-extern void CCSetVertexAttribute(const uint attribute,
-                               GLint size, GLenum type, GLsizei stride,
-                               const GLvoid *pointer, const bool normalized, const GLsizei count);
 extern void CCSetUniformVector3(const uint uniform,
                                 const float x, const float y, const float z);
 extern void CCSetUniformVector4(const uint uniform,
                                 const float x, const float y, const float z, const float w);
-
-extern void GLVertexAttribPointer(uint index, int size, GLenum type, bool normalized, int stride, const void *pointer, const GLsizei count);
-extern void GLUniform3fv(int location, int count, const GLfloat *value);
-extern void GLUniform4fv(int location, int count, const GLfloat *value);
-extern void GLUniformMatrix4fv(int location, int count, bool transpose, const GLfloat value[4][4]);
 
 #endif // __CCRENDERER_H__

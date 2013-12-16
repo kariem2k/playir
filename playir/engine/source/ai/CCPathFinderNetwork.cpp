@@ -47,7 +47,7 @@ void CCPathFinderNetwork::view()
 		{
             GLVertexPointer( 3, GL_FLOAT, sizeof( PathNode ), &nodes.list[0]->point, nodes.length );
 #ifndef DXRENDERER
-            GLDrawArrays( GL_POINTS, 0, nodes.length );
+            gRenderer->GLDrawArrays( GL_POINTS, 0, nodes.length );
 #endif
 
             for( int i=0; i<nodes.length; ++i )

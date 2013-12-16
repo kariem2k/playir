@@ -60,7 +60,7 @@ protected:
 
 public:
 	// For sorted objects, we get passed the object to draw here
-	virtual void renderOctreeObject(CCObject *object, const CCCameraBase *inCamera, const CCRenderPass pass, const bool alpha);
+	virtual void renderVisibleObject(CCObject *object, const CCCameraBase *inCamera, const CCRenderPass pass, const bool alpha);
 
     virtual bool postRender(const CCCameraBase *inCamera, const CCRenderPass pass, const bool alpha) { return false; }
 

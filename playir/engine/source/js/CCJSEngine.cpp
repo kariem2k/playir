@@ -2183,7 +2183,7 @@ bool CCJSEngine::processRenderCommands(const char *command, CCList<char> &parame
                     const float width = (float)atof( arrayParameters.list[2] );
                     const float height = (float)atof( arrayParameters.list[3] );
 
-                    GLViewport( x, y, width, height );
+                    gRenderer->GLViewport( x, y, width, height );
                     return true;
                 }
             }
@@ -2203,7 +2203,7 @@ bool CCJSEngine::processRenderCommands(const char *command, CCList<char> &parame
                     const float width = (float)atof( arrayParameters.list[2] );
                     const float height = (float)atof( arrayParameters.list[3] );
 
-                    GLScissor( x, y, width, height );
+                    gRenderer->GLScissor( x, y, width, height );
                     return true;
                 }
             }
@@ -2228,15 +2228,15 @@ bool CCJSEngine::processRenderCommands(const char *command, CCList<char> &parame
                     const GLint *uniforms = gRenderer->getShader()->uniforms;
                     if( CCText::Equals( mode, "UNIFORM_PROJECTIONMATRIX" ) )
                     {
-                        GLUniformMatrix4fv( uniforms[UNIFORM_PROJECTIONMATRIX], 1, GL_FALSE, matrix.m );
+                        gRenderer->GLUniformMatrix4fv( uniforms[UNIFORM_PROJECTIONMATRIX], 1, GL_FALSE, matrix.m );
                     }
                     else if( CCText::Equals( mode, "UNIFORM_VIEWMATRIX" ) )
                     {
-                        GLUniformMatrix4fv( uniforms[UNIFORM_VIEWMATRIX], 1, GL_FALSE, matrix.m );
+                        gRenderer->GLUniformMatrix4fv( uniforms[UNIFORM_VIEWMATRIX], 1, GL_FALSE, matrix.m );
                     }
                     else if( CCText::Equals( mode, "UNIFORM_MODELMATRIX" ) )
                     {
-                        GLUniformMatrix4fv( uniforms[UNIFORM_MODELMATRIX], 1, GL_FALSE, matrix.m );
+                        gRenderer->GLUniformMatrix4fv( uniforms[UNIFORM_MODELMATRIX], 1, GL_FALSE, matrix.m );
                     }
                     else
                     {
@@ -2257,15 +2257,15 @@ bool CCJSEngine::processRenderCommands(const char *command, CCList<char> &parame
 
                 if( CCText::Equals( mode, "TRIANGLE_STRIP" ) )
                 {
-                    GLDrawArrays( GL_TRIANGLE_STRIP, first, count );
+                    gRenderer->GLDrawArrays( GL_TRIANGLE_STRIP, first, count );
                 }
                 else if( CCText::Equals( mode, "TRIANGLES" ) )
                 {
-                    GLDrawArrays( GL_TRIANGLES, first, count );
+                    gRenderer->GLDrawArrays( GL_TRIANGLES, first, count );
                 }
                 else if( CCText::Equals( mode, "LINES" ) )
                 {
-                    GLDrawArrays( GL_LINES, first, count );
+                    gRenderer->GLDrawArrays( GL_LINES, first, count );
                 }
                 else
                 {
@@ -2294,15 +2294,15 @@ bool CCJSEngine::processRenderCommands(const char *command, CCList<char> &parame
 
                         if( CCText::Equals( mode, "LINE_STRIP" ) )
                         {
-                            GLDrawElements( GL_LINE_STRIP, count, GL_UNSIGNED_SHORT, &indices[offset] );
+                            gRenderer->GLDrawElements( GL_LINE_STRIP, count, GL_UNSIGNED_SHORT, &indices[offset] );
                         }
                         else if( CCText::Equals( mode, "TRIANGLE_STRIP" ) )
                         {
-                            GLDrawElements( GL_TRIANGLE_STRIP, count, GL_UNSIGNED_SHORT, &indices[offset] );
+                            gRenderer->GLDrawElements( GL_TRIANGLE_STRIP, count, GL_UNSIGNED_SHORT, &indices[offset] );
                         }
                         else if( CCText::Equals( mode, "TRIANGLES" ) )
                         {
-                            GLDrawElements( GL_TRIANGLES, count, GL_UNSIGNED_SHORT, &indices[offset] );
+                            gRenderer->GLDrawElements( GL_TRIANGLES, count, GL_UNSIGNED_SHORT, &indices[offset] );
                         }
                         else
                         {
@@ -2791,7 +2791,7 @@ bool CCJSEngine::processSceneCommands(const char *command, CCList<char> &paramet
                     }
                     else
                     {
-                        gEngine->removeCollideable( collideable );
+                        gEngine->collisionManager.removeCollideable( collideable );
                     }
                 }
                 return true;
@@ -3721,7 +3721,7 @@ void CCJSEngine::deleteScene(CCJSScene *scene)
 
 void CCJSEngine::deleteCollideable(CCJSCollideable *collideable)
 {
-    gEngine->removeCollideable( collideable );
+    gEngine->collisionManager.removeCollideable( collideable );
     jsCollideables.remove( collideable );
     jsObjects.remove( collideable );
     jsRenderables.remove( collideable );

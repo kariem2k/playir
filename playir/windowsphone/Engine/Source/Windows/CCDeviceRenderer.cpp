@@ -255,37 +255,49 @@ void CCDeviceRenderer::GLClear(const bool colour)
 }
 
 
-void CCDeviceRenderer::glViewport(const GLint x, const GLint y, const GLsizei width, const GLsizei height)
+void CCDeviceRenderer::GLViewport(const GLint x, const GLint y, const GLsizei width, const GLsizei height)
 {
-	CD3D11_VIEWPORT viewport(
-		x,
-		y,
-		width,
-		height
-		);
-
-	m_d3dContext->RSSetViewports(1, &viewport);
+    if( viewportX != x || viewportY != y || viewportWidth != width || viewportHeight != height )
+    {
+        viewportX = x;
+        viewportY = y;
+        viewportWidth = width;
+        viewportHeight = height;
+		CD3D11_VIEWPORT viewport(
+			x,
+			y,
+			width,
+			height
+			);
+		m_d3dContext->RSSetViewports(1, &viewport);
+	}
 }
 
 
-void CCDeviceRenderer::glScissor(const GLint x, const GLint y, const GLsizei width, const GLsizei height)
+void CCDeviceRenderer::GLScissor(const GLint x, const GLint y, const GLsizei width, const GLsizei height)
 {
-	CD3D11_VIEWPORT viewport(
-		x,
-		y,
-		width,
-		height
-		);
-
-	m_d3dContext->RSSetViewports(1, &viewport);
+	if( scissorX != x || scissorY != y || scissorWidth != width || scissorHeight != height )
+    {
+        scissorX = x;
+        scissorY = y;
+        scissorWidth = width;
+        scissorHeight = height;
+		CD3D11_VIEWPORT viewport(
+			x,
+			y,
+			width,
+			height
+			);
+		m_d3dContext->RSSetViewports(1, &viewport);
+	}
 }
 
 
-void CCDeviceRenderer::glEnable(const GLenum cap)
+void CCDeviceRenderer::GLEnable(const GLenum cap)
 {
 	if( cap == GL_CULL_FACE )
 	{
-		glCullFace( ActiveRenderState.cullingType );
+		GLCullFace( ActiveRenderState.cullingType );
 	}
 	else if( cap == GL_DEPTH_TEST )
 	{
@@ -301,7 +313,7 @@ void CCDeviceRenderer::glEnable(const GLenum cap)
 	{
 		D3D11_BLEND_DESC desc;
 		ZeroMemory(&desc, sizeof(desc));
-		
+
 		desc.RenderTarget[0].RenderTargetWriteMask = D3D11_COLOR_WRITE_ENABLE_ALL;
 
 		desc.RenderTarget[0].BlendEnable = true;
@@ -323,7 +335,7 @@ void CCDeviceRenderer::glEnable(const GLenum cap)
 }
 
 
-void CCDeviceRenderer::glDisable(const GLenum cap)
+void CCDeviceRenderer::GLDisable(const GLenum cap)
 {
 	if( cap == GL_CULL_FACE )
 	{
@@ -353,7 +365,7 @@ void CCDeviceRenderer::glDisable(const GLenum cap)
 	{
 		D3D11_BLEND_DESC desc;
 		ZeroMemory(&desc, sizeof(desc));
-		
+
 		desc.RenderTarget[0].RenderTargetWriteMask = D3D11_COLOR_WRITE_ENABLE_ALL;
 
 		desc.RenderTarget[0].BlendEnable = false;
@@ -369,7 +381,7 @@ void CCDeviceRenderer::glDisable(const GLenum cap)
 }
 
 
-void CCDeviceRenderer::glCullFace(const GLenum mode)
+void CCDeviceRenderer::GLCullFace(const GLenum mode)
 {
 	D3D11_RASTERIZER_DESC desc;
 	ZeroMemory(&desc, sizeof(desc));
@@ -385,7 +397,7 @@ void CCDeviceRenderer::glCullFace(const GLenum mode)
 }
 
 
-void CCDeviceRenderer::glBindTexture(const GLenum mode, const CCTextureName *texture)
+void CCDeviceRenderer::GLBindTexture(const GLenum mode, const CCTextureName *texture)
 {
 	const CCTexture2D *Texture2D = static_cast<const CCTexture2D*>( texture );
 	if( Texture2D != NULL )
@@ -395,7 +407,7 @@ void CCDeviceRenderer::glBindTexture(const GLenum mode, const CCTextureName *tex
 }
 
 
-void CCDeviceRenderer::glDrawArrays(GLenum mode, GLint first, GLsizei count)
+void CCDeviceRenderer::GLDrawArrays(GLenum mode, GLint first, GLsizei count)
 {
 	DrawData *drawData = m_drawList.list[m_drawIndex];
 
@@ -413,7 +425,7 @@ void CCDeviceRenderer::glDrawArrays(GLenum mode, GLint first, GLsizei count)
 }
 
 
-void CCDeviceRenderer::glDrawElements(GLenum mode, GLsizei count, GLenum type, const void *indices)
+void CCDeviceRenderer::GLDrawElements(GLenum mode, GLsizei count, GLenum type, const void *indices)
 {
 	DrawData *drawData = m_drawList.list[m_drawIndex];
 
@@ -436,7 +448,7 @@ void CCDeviceRenderer::glDrawElements(GLenum mode, GLsizei count, GLenum type, c
 }
 
 
-void CCDeviceRenderer::glVertexAttribPointer(uint index, int size, GLenum type, bool normalized, int stride, const void *pointer, const GLsizei count)
+void CCDeviceRenderer::GLVertexAttribPointer(uint index, int size, GLenum type, bool normalized, int stride, const void *pointer, const GLsizei count)
 {
 	if( index == ATTRIB_VERTEX )
 	{
@@ -530,7 +542,7 @@ void CCDeviceRenderer::derefVertexPointer(const uint index, const void *pointer)
 }
 
 
-void CCDeviceRenderer::glUniform4fv(int location, int count, const GLfloat *value)
+void CCDeviceRenderer::GLUniform4fv(int location, int count, const GLfloat *value)
 {
 	const GLint *uniforms = getShader()->uniforms;
 	if( location == uniforms[UNIFORM_MODELCOLOUR] )
@@ -549,7 +561,7 @@ void CCDeviceRenderer::glUniform4fv(int location, int count, const GLfloat *valu
 }
 
 
-void CCDeviceRenderer::glUniformMatrix4fv(int location, int count, bool transpose, const GLfloat value[4][4])
+void CCDeviceRenderer::GLUniformMatrix4fv(int location, int count, bool transpose, const GLfloat value[4][4])
 {
 	const GLint *uniforms = getShader()->uniforms;
 	if( location == uniforms[UNIFORM_PROJECTIONMATRIX] )
@@ -872,78 +884,6 @@ void CCSetModelViewProjectionMatrix()
 	if( CCCameraBase::CurrentCamera != NULL )
 	{
 		CCMatrix &viewMatrix = CCCameraBase::CurrentCamera->getViewMatrix();
-		GLUniformMatrix4fv( UNIFORM_PROJECTIONMATRIX, 1, GL_FALSE, viewMatrix.m );
+		gRenderer->GLUniformMatrix4fv( UNIFORM_PROJECTIONMATRIX, 1, GL_FALSE, viewMatrix.m );
 	}
-}
-
-
-// Attempt to simulate OpenGL interface
-void GLViewport(const GLint x, const GLint y, const GLsizei width, const GLsizei height)
-{
-	gDeviceRenderer->glViewport( x, y, width, height );
-}
-
-
-void GLScissor(const GLint x, const GLint y, const GLsizei width, const GLsizei height)
-{
-	gDeviceRenderer->glScissor( x, y, width, height );
-}
-
-
-void GLEnable(const GLenum cap)
-{
-	gDeviceRenderer->glEnable( cap );
-}
-
-
-void GLDisable(const GLenum cap)
-{
-	gDeviceRenderer->glDisable( cap );
-}
-
-
-void GLCullFace(const GLenum mode)
-{
-	gDeviceRenderer->glCullFace( mode );
-}
-
-
-void GLBindTexture(const GLenum mode, const CCTextureName *texture)
-{
-	gDeviceRenderer->glBindTexture( mode, texture );
-}
-
-
-void GLDrawArrays(GLenum mode, GLint first, GLsizei count)
-{
-	gDeviceRenderer->glDrawArrays(mode, first, count);
-}
-
-
-void GLDrawElements(GLenum mode, GLsizei count, GLenum type, const void *indices)
-{
-	gDeviceRenderer->glDrawElements(mode, count, type, indices);
-}
-
-
-void GLVertexAttribPointer(uint index, int size, GLenum type, bool normalized, int stride, const void *pointer, const GLsizei count)
-{
-	gDeviceRenderer->glVertexAttribPointer(index, size, type, normalized, stride, pointer, count);
-}
-
-
-void GLUniform3fv(int location, int count, const GLfloat *value)
-{
-}
-
-
-void GLUniform4fv(int location, int count, const GLfloat *value)
-{
-	gDeviceRenderer->glUniform4fv( location, count, value );
-}
-
-
-void GLUniformMatrix4fv(int location, int count, bool transpose, const GLfloat value[4][4])
-{
-	gDeviceRenderer->glUniformMatrix4fv( location, count, transpose, value );
 }

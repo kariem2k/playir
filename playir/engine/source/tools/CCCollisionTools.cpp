@@ -13,18 +13,32 @@
 
 CCCollisionManager::CCCollisionManager(const float octreeSize)
 {
-    tree = new CCOctree( NULL, CCVector3(), octreeSize );
-	pruneTreesTimer = 0.0f;
+    octree = new CCOctree( NULL, CCVector3(), octreeSize );
+	pruneOctreeTimer = 0.0f;
 }
 
 
 CCCollisionManager::~CCCollisionManager()
 {
-	if( tree != NULL )
+	if( octree != NULL )
 	{
-		CCOctreeDeleteLeafs( tree );
-        DELETE_POINTER( tree );
+		CCOctreeDeleteLeafs( octree );
+        DELETE_POINTER( octree );
 	}
+}
+
+
+void CCCollisionManager::addCollideable(CCCollideable* collideable)
+{
+	collideables.add( collideable );
+	CCOctreeAddObject( octree, collideable );
+}
+
+
+void CCCollisionManager::removeCollideable(CCCollideable* collideable)
+{
+    collideables.remove( collideable );
+	CCOctreeRemoveObject( collideable );
 }
 
 
@@ -111,7 +125,7 @@ static void setCollideablesList(const CCVector3 &sourceMin, const CCVector3 &sou
 	static const CCOctree *leafsList[MAX_LEAFS];
 	static int numberOfLeafs;
 	numberOfLeafs = 0;
-	CCOctreeListLeafs( gEngine->collisionManager.tree, sourceMin, sourceMax, leafsList, &numberOfLeafs );
+	CCOctreeListLeafs( gEngine->collisionManager.octree, sourceMin, sourceMax, leafsList, &numberOfLeafs );
     CCASSERT( numberOfLeafs < MAX_LEAFS );
     LOG_NEWMAX( "Max leafs per scan", maxLeafsPerScan, numberOfLeafs );
 

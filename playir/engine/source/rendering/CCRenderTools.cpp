@@ -109,9 +109,7 @@ void CCRenderSquare(const CCVector3 &start, const CCVector3 &end, const bool out
 
 		// draw the square
 		GLVertexPointer( 2, GL_FLOAT, 0, vertices, 5 );
-#ifndef DXRENDERER
-		GLDrawArrays( GL_LINE_STRIP, 0, 5 );
-#endif
+		gRenderer->GLDrawArrays( GL_LINE_STRIP, 0, 5 );
 	}
 	else
 	{
@@ -125,7 +123,7 @@ void CCRenderSquare(const CCVector3 &start, const CCVector3 &end, const bool out
 
 		// draw the square
 		GLVertexPointer( 3, GL_FLOAT, 0, vertices, 4 );
-		GLDrawArrays( GL_TRIANGLE_STRIP, 0, 4 );
+		gRenderer->GLDrawArrays( GL_TRIANGLE_STRIP, 0, 4 );
 	}
 }
 
@@ -144,7 +142,7 @@ void CCRenderSquareYAxisAligned(const CCVector3 &start, const CCVector3 &end)
 
 	// draw the square
 	GLVertexPointer( 3, GL_FLOAT, 0, vertices, 4 );
-	GLDrawArrays( GL_TRIANGLE_STRIP, 0, 4 );
+	gRenderer->GLDrawArrays( GL_TRIANGLE_STRIP, 0, 4 );
 }
 
 
@@ -177,7 +175,7 @@ void CCRenderLine(const CCVector3 &start, const CCVector3 &end)
 	};
 
 	GLVertexPointer( 3, GL_FLOAT, 0, vertices, 2 );
-	GLDrawArrays( GL_LINES, 0, 2 );
+	gRenderer->GLDrawArrays( GL_LINES, 0, 2 );
 }
 
 
@@ -210,7 +208,7 @@ void CCRenderCube(const bool outline)
 			0, 1, 3, 2, 0, 4, 5, 1, 5, 7, 3, 7, 6, 2, 6, 4,
 		};
 		static const uint numberOfFaces = sizeof( faces ) / sizeof( ushort );
-		GLDrawElements( GL_LINE_STRIP, numberOfFaces, GL_UNSIGNED_SHORT, faces );
+		gRenderer->GLDrawElements( GL_LINE_STRIP, numberOfFaces, GL_UNSIGNED_SHORT, faces );
 	}
 	else
 	{
@@ -219,7 +217,7 @@ void CCRenderCube(const bool outline)
 			0, 1, 2, 3, 7, 1, 5, 4, 7, 6, 2, 4, 0, 1,
 		};
 		static const uint numberOfFaces = sizeof( faces ) / sizeof( ushort );
-		GLDrawElements( GL_TRIANGLE_STRIP, numberOfFaces, GL_UNSIGNED_SHORT, faces );
+		gRenderer->GLDrawElements( GL_TRIANGLE_STRIP, numberOfFaces, GL_UNSIGNED_SHORT, faces );
 	}
 }
 
@@ -253,9 +251,7 @@ void CCRenderCubeMinMax(const CCVector3 min, const CCVector3 max, const bool out
 			0, 1, 3, 2, 0, 4, 5, 1, 5, 7, 3, 7, 6, 2, 6, 4,
 		};
 		static const uint numberOfFaces = sizeof( faces ) / sizeof( ushort );
-#ifndef DXRENDERER
-		GLDrawElements( GL_LINE_STRIP, numberOfFaces, GL_UNSIGNED_SHORT, faces );
-#endif
+		gRenderer->GLDrawElements( GL_LINE_STRIP, numberOfFaces, GL_UNSIGNED_SHORT, faces );
 	}
 	else
 	{
@@ -264,7 +260,7 @@ void CCRenderCubeMinMax(const CCVector3 min, const CCVector3 max, const bool out
 			0, 1, 2, 3, 7, 1, 5, 4, 7, 6, 2, 4, 0, 1,
 		};
 		static const uint numberOfFaces = sizeof( faces ) / sizeof( ushort );
-		GLDrawElements( GL_TRIANGLE_STRIP, numberOfFaces, GL_UNSIGNED_SHORT, faces );
+		gRenderer->GLDrawElements( GL_TRIANGLE_STRIP, numberOfFaces, GL_UNSIGNED_SHORT, faces );
 	}
 }
 

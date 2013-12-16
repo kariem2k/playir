@@ -24,9 +24,6 @@ static CCText PackagedJSFile = "_native.html";
 
 
 const char *_PLAYIR_SERVER_LOCAL_URL = "http://localhost/projects/playir.js/";
-//const char *_PLAYIR_SERVER_LOCAL_URL = "http://192.168.1.89/projects/playir.js/";
-//const char *_PLAYIR_SERVER_LOCAL_URL = "http://192.168.12.127/projects/playir.js/";
-//const char *_PLAYIR_SERVER_LOCAL_URL = "http://192.168.44.93/projects/playir.js/";
 
 #ifdef _PLAYIR_DEBUG_LOCALSERVER
 const char *_PLAYIR_SERVER_URL = _PLAYIR_SERVER_LOCAL_URL;
@@ -91,7 +88,6 @@ void CCAppEngine::start()
 {
 //    CCAddFlag( gRenderer->renderFlags, render_collisionBoxes );
 //    CCAddFlag( gRenderer->renderFlags, render_collisionTrees );
-//    CCAddFlag( gRenderer->renderFlags, render_pathFinder );
 
 #ifdef IOS
     CCAppManager::SetOrientation( 270.0f, false );
@@ -137,7 +133,7 @@ void CCAppEngine::updateLoop()
         const float jsScriptUpdateDelta = time.lifetime - jsScriptUpdateTime;
         if( jsScriptUpdateDelta > 6.0f )
         {
-        	DEBUGLOG( "CCAppEngine::updateLoop()restarting %f %f\n", jsScriptUpdateDelta, time.lifetime );
+        	DEBUGLOG( "CCAppEngine::updateLoop() restarting %f %f\n", jsScriptUpdateDelta, time.lifetime );
 
             // If we're on our latest engine, fallback to our original version
             if( usingLatestUpdate )

@@ -39,7 +39,7 @@ void CCPrimitiveCube::renderVertices(const bool textured)
     CCRenderer::CCSetRenderStates( true );
 
 	GLVertexPointer( 3, GL_FLOAT, 0, vertices, vertexCount );
-	GLDrawElements( GL_TRIANGLE_STRIP, numberOfFaces, GL_UNSIGNED_SHORT, faces );
+	gRenderer->GLDrawElements( GL_TRIANGLE_STRIP, numberOfFaces, GL_UNSIGNED_SHORT, faces );
 }
 
 
@@ -56,7 +56,7 @@ void CCPrimitiveCube::renderOutline()
 
 #ifndef DXRENDERER
 	GLVertexPointer( 3, GL_FLOAT, 0, vertices, vertexCount );
-	GLDrawElements( GL_LINE_STRIP, numberOfFaces, GL_UNSIGNED_SHORT, faces );
+	gRenderer->GLDrawElements( GL_LINE_STRIP, numberOfFaces, GL_UNSIGNED_SHORT, faces );
 #endif
 }
 

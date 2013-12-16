@@ -211,8 +211,8 @@ void CCPrimitive3DS::renderVertices(const bool textured)
     CCRenderer::CCSetRenderStates( true );
 
 	GLVertexPointer( 3, GL_FLOAT, 0, vertices, vertexCount );
-    CCSetVertexAttribute( ATTRIB_NORMAL, 3, GL_FLOAT, 0, normals, true, vertexCount );
+    gRenderer->GLVertexAttribPointer( ATTRIB_NORMAL, 3, GL_FLOAT, true, 0, normals, vertexCount );
     CCSetTexCoords( adjustedUVs != NULL ? adjustedUVs : modelUVs );
 
-	GLDrawArrays( GL_TRIANGLES, 0, vertexCount );
+	gRenderer->GLDrawArrays( GL_TRIANGLES, 0, vertexCount );
 }

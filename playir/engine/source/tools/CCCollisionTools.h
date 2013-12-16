@@ -24,10 +24,13 @@ struct CCCollisionManager
 	CCCollisionManager(const float octreeSize);
 	~CCCollisionManager();
 
-	CCOctree *tree;
-	float pruneTreesTimer;
+	CCOctree *octree;
+	float pruneOctreeTimer;
 
     CCList<CCCollideable> collideables;
+
+	void addCollideable(CCCollideable* collideable);
+	void removeCollideable(CCCollideable* collideable);
 };
 
 

@@ -18,7 +18,7 @@ void CCPrimitiveSphere::renderVertices(const bool textured)
     CCRenderer::CCSetRenderStates( true );
 
 	GLVertexPointer( 3, GL_FLOAT, 0, vertices, vertexCount ) ;
-	GLDrawArrays( GL_TRIANGLE_STRIP, 0, vertexCount );
+	gRenderer->GLDrawArrays( GL_TRIANGLE_STRIP, 0, vertexCount );
 }
 
 

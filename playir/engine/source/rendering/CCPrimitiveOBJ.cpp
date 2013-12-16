@@ -218,13 +218,13 @@ void CCPrimitiveOBJ::renderVertices(const bool textured)
     CCRenderer::CCSetRenderStates( true );
 
 	GLVertexPointer( 3, GL_FLOAT, 0, vertices, vertexCount );
-    CCSetVertexAttribute( ATTRIB_NORMAL, 3, GL_FLOAT, 0, normals, true, vertexCount );
+    gRenderer->GLVertexAttribPointer( ATTRIB_NORMAL, 3, GL_FLOAT, true, 0, normals, vertexCount );
     CCSetTexCoords( adjustedUVs != NULL ? adjustedUVs : modelUVs );
 
     // Turn on wireframe mode
     //glPolygonMode( GL_FRONT_AND_BACK, GL_LINE );
 
-	GLDrawArrays( GL_TRIANGLES, 0, vertexCount );
+	gRenderer->GLDrawArrays( GL_TRIANGLES, 0, vertexCount );
 
     // Turn off wireframe mode
     //glPolygonMode( GL_FRONT_AND_BACK, GL_FILL );

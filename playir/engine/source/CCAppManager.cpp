@@ -908,7 +908,7 @@ void CCAppManager::WebJSLoadedNativeThread(const char *url, const char *data)
 {
     if( AppStarted )
     {
-        DEBUGLOG( "CCAppManager::webJSLoaded webJSJavaScriptCalls:%i \n", WebJSJavaScriptCalls );
+        DEBUGLOG( "CCAppManager::WebJSLoadedNativeThread WebJSJavaScriptCalls:%i \n", WebJSJavaScriptCalls );
         WebJSJavaScriptCalls = 0;
         CCAppManager::WebJSSetJavaScriptUpdateTime( gEngine->time.lifetime );
 
@@ -1042,7 +1042,7 @@ void CCAppManager::WebJSRunJavaScript(const char *script, const bool returnResul
 
 void CCAppManager::WebJSRunJavaScriptNativeThread(const char *script, const bool returnResult)
 {
-    //DEBUGLOG( "CCAppManager::webJSRun:%f, %s\n", gEngine->time.lifetime, script );
+    //DEBUGLOG( "CCAppManager::WebJSRunJavaScriptNativeThread:%f, %s\n", gEngine->time.lifetime, script );
 
     CCText data;
 
@@ -1095,6 +1095,8 @@ void CCAppManager::WebJSJavaScriptResultNativeThread(const char *data, const boo
 	else
 	{
 		WebJSJavaScriptCalls--;
+
+        //DEBUGLOG( "CCAppManager::WebJSJavaScriptResultNativeThread WebJSJavaScriptCalls:%i \n", WebJSJavaScriptCalls );
 		CCAppManager::WebJSSetJavaScriptUpdateTime( gEngine->time.lifetime );
 
 		// Fire update callbacks

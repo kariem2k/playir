@@ -28,7 +28,7 @@ bool CCJSScene::render(const CCCameraBase *inCamera, const CCRenderPass pass, co
 }
 
 
-void CCJSScene::renderOctreeObject(CCObject *object, const CCCameraBase *inCamera, const CCRenderPass pass, const bool alpha)
+void CCJSScene::renderVisibleObject(CCObject *object, const CCCameraBase *inCamera, const CCRenderPass pass, const bool alpha)
 {
     if( camera == inCamera )
 	{

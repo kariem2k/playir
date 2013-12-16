@@ -216,13 +216,6 @@ bool CCEngine::setupRenderer()
     	if( textureManager == NULL )
     	{
     		textureManager = new CCTextureManager();
-
-            // Load in a 1x1 white texture to use for untextured draws
-            textureManager->assignTextureIndex( "transparent.png", Resource_Packaged, false, true, true );
-            textureManager->assignTextureIndex( "white.png", Resource_Packaged, false, true, true );
-
-            DEBUGLOG( "CCEngine::setupRenderer\n" );
-            textureManager->setTextureIndex( 0 );
     	}
     	else
     	{
@@ -369,7 +362,7 @@ bool CCEngine::updateJobsThread()
 
 		auto currentThread = Concurrency::task_continuation_context::use_current();
 		Concurrency::create_task([this, callback] {
-			
+
 			// Runs on a random thread
 			if( callback->isActive() )
 			{
@@ -377,7 +370,7 @@ bool CCEngine::updateJobsThread()
 			}
 
 		}).then([this, callback]() {
-			
+
 			// Finishes on current thread
 			if( callback->isActive() )
 			{
@@ -448,13 +441,13 @@ void CCEngine::finishJobs()
     urlManager->update();
 
 	// Prune the octree
-	if( collisionManager.pruneTreesTimer > 0.0f )
+	if( collisionManager.pruneOctreeTimer > 0.0f )
 	{
-		collisionManager.pruneTreesTimer -= time.real;
-		if( collisionManager.pruneTreesTimer <= 0.0f )
+		collisionManager.pruneOctreeTimer -= time.real;
+		if( collisionManager.pruneOctreeTimer <= 0.0f )
 		{
             //DEBUGLOG( "Octree - prune" );
-			CCOctreePruneTree( collisionManager.tree );
+			CCOctreePruneTree( collisionManager.octree );
 		}
 	}
 }
@@ -465,20 +458,6 @@ void CCEngine::restart()
     urlManager->flushPendingRequests();
 
     start();
-}
-
-
-void CCEngine::addCollideable(CCCollideable* collideable)
-{
-	collisionManager.collideables.add( collideable );
-	CCOctreeAddObject( collisionManager.tree, collideable );
-}
-
-
-void CCEngine::removeCollideable(CCCollideable* collideable)
-{
-    collisionManager.collideables.remove( collideable );
-	CCOctreeRemoveObject( collideable );
 }
 
 

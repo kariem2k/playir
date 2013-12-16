@@ -107,9 +107,6 @@ protected:
 	virtual void finishJobs();
 
 public:
-	void addCollideable(CCCollideable* collideable);
-	void removeCollideable(CCCollideable* collideable);
-
     virtual void resize();
     virtual void resized();
     virtual bool isOrientationSupported(const float angle);

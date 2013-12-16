@@ -427,7 +427,7 @@ void CCJSPrimitiveFBX::renderVertices(const bool textured)
             for( int i=0; i<submodel.submeshes.length; ++i )
             {
                 Submesh &submesh = *submodel.submeshes.list[i];
-                GLDrawElements( GL_TRIANGLES, submesh.count, GL_UNSIGNED_SHORT, &submodel.indices[submesh.offset] );
+                gRenderer->GLDrawElements( GL_TRIANGLES, submesh.count, GL_UNSIGNED_SHORT, &submodel.indices[submesh.offset] );
             }
         }
     }

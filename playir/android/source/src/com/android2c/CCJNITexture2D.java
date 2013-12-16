@@ -24,6 +24,7 @@ import javax.microedition.khronos.opengles.GL11;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.opengl.GLUtils;
+import android.opengl.GLES20;
 import android.util.Log;
 
 public class CCJNITexture2D
@@ -282,17 +283,21 @@ public class CCJNITexture2D
         			gl.glBindTexture( GL10.GL_TEXTURE_2D, glName[0] );
 
        				gl.glTexParameterf( GL10.GL_TEXTURE_2D, GL10.GL_TEXTURE_MAG_FILTER, GL10.GL_LINEAR );
-			        // if( false && mipmap )
-			        // {
-			        // 	gl.glTexParameteri( GL10.GL_TEXTURE_2D, GL11.GL_TEXTURE_MIN_FILTER, GL11.GL_LINEAR_MIPMAP_LINEAR );
-				       //  gl.glTexParameteri( GL10.GL_TEXTURE_2D, GL11.GL_GENERATE_MIPMAP, GL11.GL_TRUE );
-			        // }
-			        // else
+       				if( mipmap )
+       				{
+       					gl.glTexParameteri( GL10.GL_TEXTURE_2D, GL11.GL_TEXTURE_MIN_FILTER, GL11.GL_LINEAR_MIPMAP_LINEAR );
+       				}
+       				else
 			        {
 			        	gl.glTexParameterf( GL10.GL_TEXTURE_2D, GL10.GL_TEXTURE_MIN_FILTER, GL10.GL_LINEAR );
 			        }
 
 			        GLUtils.texImage2D( GL11.GL_TEXTURE_2D, 0, texture.bitmap, 0 );
+			        
+			        if( mipmap )
+			        {
+			        	GLES20.glGenerateMipmap( GLES20.GL_TEXTURE_2D );
+			        }
 
 			    	texture.bitmap.recycle();
 

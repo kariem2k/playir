@@ -49,6 +49,7 @@ extern "C" JNIEXPORT void JNICALL Java_com_android2c_CCJNI_OnSurfaceChanged(JNIE
 
 	if( firstRun )
 	{
+		DEBUGLOG( "OnSurfaceChanged - firstRun" );
 		if( gEngine != NULL )
 		{
 			// Force close any previous web view instances

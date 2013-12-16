@@ -31,7 +31,7 @@ public:
     }
 
     virtual bool render(const CCCameraBase *inCamera, const CCRenderPass pass, const bool alpha);
-	virtual void renderOctreeObject(CCObject *object, const CCCameraBase *inCamera, const CCRenderPass pass, const bool alpha);
+	virtual void renderVisibleObject(CCObject *object, const CCCameraBase *inCamera, const CCRenderPass pass, const bool alpha);
 
     void setCamera(CCJSCamera *camera)
     {

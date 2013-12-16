@@ -201,7 +201,7 @@ void CCSceneBase::renderObjects(const CCCameraBase *inCamera, const CCRenderPass
 }
 
 
-void CCSceneBase::renderOctreeObject(CCObject *object, const CCCameraBase *inCamera, const CCRenderPass pass, const bool alpha)
+void CCSceneBase::renderVisibleObject(CCObject *object, const CCCameraBase *inCamera, const CCRenderPass pass, const bool alpha)
 {
 	if( inCamera->getIndex() == 0 )
 	{
@@ -237,14 +237,14 @@ void CCSceneBase::removeObject(CCObject* object)
 void CCSceneBase::addCollideable(CCCollideable *collideable)
 {
     collideables.add( collideable );
-	gEngine->addCollideable( collideable );
+	gEngine->collisionManager.addCollideable( collideable );
 }
 
 
 void CCSceneBase::removeCollideable(CCCollideable *collideable)
 {
     collideables.remove( collideable );
-	gEngine->removeCollideable( collideable );
+	gEngine->collisionManager.removeCollideable( collideable );
 }
 
 

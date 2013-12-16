@@ -123,8 +123,8 @@ void CCCameraBase::recalcViewport()
 
 void CCCameraBase::setViewport()
 {
-    GLViewport( viewport[0], viewport[1], viewport[2], viewport[3] );
-    GLScissor( viewport[0], viewport[1], viewport[2], viewport[3] );
+    gRenderer->GLViewport( viewport[0], viewport[1], viewport[2], viewport[3] );
+    gRenderer->GLScissor( viewport[0], viewport[1], viewport[2], viewport[3] );
 }
 
 

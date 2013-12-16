@@ -161,7 +161,7 @@ void CCPrimitiveSquare::renderVertices(const bool textured)
 		};
         GLVertexPointer( 3, GL_FLOAT, 0, vertices_forwardFacing, 4 );
     }
-	GLDrawArrays( GL_TRIANGLE_STRIP, 0, 4 );
+	gRenderer->GLDrawArrays( GL_TRIANGLE_STRIP, 0, 4 );
 
 	if( position != NULL || scale != NULL )
 	{
@@ -187,7 +187,7 @@ void CCPrimitiveSquare::renderOutline()
 	};
 	static const uint numberOfFaces = sizeof( faces ) / sizeof( ushort );
 
-	GLDrawElements( GL_LINE_STRIP, numberOfFaces, GL_UNSIGNED_SHORT, faces );
+	gRenderer->GLDrawElements( GL_LINE_STRIP, numberOfFaces, GL_UNSIGNED_SHORT, faces );
 #endif
 }
 

@@ -92,6 +92,9 @@ CCRenderer::~CCRenderer()
 
 bool CCRenderer::setup()
 {
+    viewportX = viewportY = viewportWidth = viewportHeight = 0.0f;
+    scissorX = scissorY = scissorWidth = scissorHeight = 0.0f;
+
     usingOpenGL2 = true;
 	renderFlags = render_all;
     if( !createContext() || !loadShaders() )
@@ -202,21 +205,6 @@ void CCRenderer::clear(const bool colour)
         CCSetDepthWrite( false );
         CCSetRenderStates();
     }
-}
-
-
-void CCRenderer::GLClear(const bool colour)
-{
-#ifndef DXRENDERER
-    if( colour )
-    {
-        glClear( GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT );
-    }
-    else
-    {
-        glClear( GL_DEPTH_BUFFER_BIT );
-    }
-#endif
 }
 
 
@@ -370,11 +358,11 @@ void CCRenderer::CCSetRenderStates(const bool setModelViewProjectionMatrix)
         ActiveRenderState.blendEnabled = PendingRenderState.blendEnabled;
         if( ActiveRenderState.blendEnabled )
         {
-            GLEnable( GL_BLEND );
+            gRenderer->GLEnable( GL_BLEND );
         }
         else
         {
-            GLDisable( GL_BLEND );
+            gRenderer->GLDisable( GL_BLEND );
         }
     }
 
@@ -383,11 +371,11 @@ void CCRenderer::CCSetRenderStates(const bool setModelViewProjectionMatrix)
         ActiveRenderState.depthReadEnabled = PendingRenderState.depthReadEnabled;
         if( ActiveRenderState.depthReadEnabled )
         {
-            GLEnable( GL_DEPTH_TEST );
+            gRenderer->GLEnable( GL_DEPTH_TEST );
         }
         else
         {
-            GLDisable( GL_DEPTH_TEST );
+            gRenderer->GLDisable( GL_DEPTH_TEST );
         }
     }
 
@@ -397,11 +385,11 @@ void CCRenderer::CCSetRenderStates(const bool setModelViewProjectionMatrix)
 #ifdef DXRENDERER
 		if( ActiveRenderState.depthWriteEnabled )
         {
-            GLEnable( CC_DEPTH_WRITE );
+            gRenderer->GLEnable( CC_DEPTH_WRITE );
         }
         else
         {
-            GLDisable( CC_DEPTH_WRITE );
+            gRenderer->GLDisable( CC_DEPTH_WRITE );
         }
 #else
         glDepthMask( ActiveRenderState.depthWriteEnabled ? GL_TRUE : GL_FALSE );
@@ -413,11 +401,11 @@ void CCRenderer::CCSetRenderStates(const bool setModelViewProjectionMatrix)
         ActiveRenderState.cullingEnabled = PendingRenderState.cullingEnabled;
         if( ActiveRenderState.cullingEnabled )
         {
-            GLEnable( GL_CULL_FACE );
+            gRenderer->GLEnable( GL_CULL_FACE );
         }
         else
         {
-            GLDisable( GL_CULL_FACE );
+            gRenderer->GLDisable( GL_CULL_FACE );
         }
     }
 
@@ -426,11 +414,11 @@ void CCRenderer::CCSetRenderStates(const bool setModelViewProjectionMatrix)
         ActiveRenderState.cullingType = PendingRenderState.cullingType;
         if( ActiveRenderState.cullingType == GL_FRONT )
         {
-            GLCullFace( GL_FRONT );
+            gRenderer->GLCullFace( GL_FRONT );
         }
         else if( ActiveRenderState.cullingType == GL_BACK )
         {
-            GLCullFace( GL_BACK );
+            gRenderer->GLCullFace( GL_BACK );
         }
     }
 
@@ -534,9 +522,9 @@ void CCSetModelViewProjectionMatrix()
         const CCMatrix &projectionMatrix = CCCameraBase::CurrentCamera->getProjectionMatrix();
 
         const GLint *uniforms = gRenderer->getShader()->uniforms;
-        GLUniformMatrix4fv( uniforms[UNIFORM_PROJECTIONMATRIX], 1, GL_FALSE, projectionMatrix.m );
-        GLUniformMatrix4fv( uniforms[UNIFORM_VIEWMATRIX], 1, GL_FALSE, viewMatrix.m );
-        GLUniformMatrix4fv( uniforms[UNIFORM_MODELMATRIX], 1, GL_FALSE, modelMatrix.m );
+        gRenderer->GLUniformMatrix4fv( uniforms[UNIFORM_PROJECTIONMATRIX], 1, GL_FALSE, projectionMatrix.m );
+        gRenderer->GLUniformMatrix4fv( uniforms[UNIFORM_VIEWMATRIX], 1, GL_FALSE, viewMatrix.m );
+        gRenderer->GLUniformMatrix4fv( uniforms[UNIFORM_MODELMATRIX], 1, GL_FALSE, modelMatrix.m );
 
         if( uniforms[UNIFORM_MODELNORMALMATRIX] != -1 )
         {
@@ -548,7 +536,7 @@ void CCSetModelViewProjectionMatrix()
             static CCMatrix modelNormalMatrix;
             CCMatrixInverse( inverseModelViewMatrix, modelViewMatrix );
             CCMatrixTranspose( modelNormalMatrix, inverseModelViewMatrix );
-            GLUniformMatrix4fv( uniforms[UNIFORM_MODELNORMALMATRIX], 1, GL_FALSE, modelNormalMatrix.m );
+            gRenderer->GLUniformMatrix4fv( uniforms[UNIFORM_MODELNORMALMATRIX], 1, GL_FALSE, modelNormalMatrix.m );
         }
     }
     else
@@ -566,61 +554,152 @@ void CCSetModelViewProjectionMatrix()
 
 
 // Attempt to simulate OpenGL 1.1 interface to shaders
+void CCRenderer::GLClear(const bool colour)
+{
 #ifndef DXRENDERER
-void GLViewport(const GLint x, const GLint y, const GLsizei width, const GLsizei height)
-{
-	glViewport( x, y, width, height );
-}
-
-
-void GLScissor(const GLint x, const GLint y, const GLsizei width, const GLsizei height)
-{
-	glScissor( x, y, width, height );
-}
-
-
-void GLEnable(const GLenum cap)
-{
-	glEnable( cap );
-}
-
-
-void GLDisable(const GLenum cap)
-{
-	glDisable( cap );
-}
-
-
-void GLCullFace(const GLenum mode)
-{
-	glCullFace( mode );
-}
-
-
-void GLBindTexture(const GLenum mode, const CCTextureName *texture)
-{
-	glBindTexture( mode, texture->name() );
-}
-
-
-void GLDrawArrays(GLenum mode, GLint first, GLsizei count)
-{
-	glDrawArrays( mode, first, count );
-}
-
-
-void GLDrawElements(GLenum mode, GLsizei count, GLenum type, const void *indices)
-{
-	glDrawElements( mode, count, type, indices );
-}
+    if( colour )
+    {
+        glClear( GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT );
+    }
+    else
+    {
+        glClear( GL_DEPTH_BUFFER_BIT );
+    }
 #endif
+}
+
+
+void CCRenderer::GLViewport(const GLint x, const GLint y, const GLsizei width, const GLsizei height)
+{
+    if( viewportX != x || viewportY != y || viewportWidth != width || viewportHeight != height )
+    {
+        viewportX = x;
+        viewportY = y;
+        viewportWidth = width;
+        viewportHeight = height;
+#ifndef DXRENDERER
+        glViewport( x, y, width, height );
+#endif
+	}
+}
+
+
+void CCRenderer::GLScissor(const GLint x, const GLint y, const GLsizei width, const GLsizei height)
+{
+    if( scissorX != x || scissorY != y || scissorWidth != width || scissorHeight != height )
+    {
+        scissorX = x;
+        scissorY = y;
+        scissorWidth = width;
+        scissorHeight = height;
+#ifndef DXRENDERER
+        glScissor( x, y, width, height );
+#endif
+    }
+}
+
+
+void CCRenderer::GLEnable(const GLenum cap)
+{
+#ifndef DXRENDERER
+	glEnable( cap );
+#endif
+}
+
+
+void CCRenderer::GLDisable(const GLenum cap)
+{
+#ifndef DXRENDERER
+	glDisable( cap );
+#endif
+}
+
+
+void CCRenderer::GLCullFace(const GLenum mode)
+{
+#ifndef DXRENDERER
+	glCullFace( mode );
+#endif
+}
+
+
+void CCRenderer::GLBindTexture(const GLenum mode, const CCTextureName *texture)
+{
+#ifndef DXRENDERER
+	glBindTexture( mode, texture->name() );
+#endif
+}
+
+
+void CCRenderer::GLDrawArrays(GLenum mode, GLint first, GLsizei count)
+{
+#ifndef DXRENDERER
+	glDrawArrays( mode, first, count );
+#endif
+}
+
+
+void CCRenderer::GLDrawElements(GLenum mode, GLsizei count, GLenum type, const void *indices)
+{
+#ifndef DXRENDERER
+	glDrawElements( mode, count, type, indices );
+#endif
+}
+
+
+void CCRenderer::GLVertexAttribPointer(uint index, int size, GLenum type, bool normalized, int stride, const void *pointer, const GLsizei count)
+{
+#ifndef DXRENDERER
+#ifndef QT
+    glVertexAttribPointer( index, size, type, normalized, stride, pointer );
+#else
+    gRenderer->getShader()->program->setAttributeArray( index, (const GLfloat*)pointer, size, stride );
+#endif
+#endif
+}
+
+
+void CCRenderer::GLUniform3fv(int location, int count, const GLfloat *value)
+{
+#ifndef DXRENDERER
+#ifndef QT
+    glUniform3fv( location, count, value );
+#else
+    gRenderer->getShader()->program->setUniformValue( location, value[0], value[1], value[2] );
+#endif
+#endif
+}
+
+
+void CCRenderer::GLUniform4fv(int location, int count, const GLfloat *value)
+{
+#ifndef DXRENDERER
+#ifndef QT
+    glUniform4fv( location, count, value );
+#else
+    gRenderer->getShader()->program->setUniformValue( location, value[0], value[1], value[2], value[3] );
+#endif
+#endif
+}
+
+
+void CCRenderer::GLUniformMatrix4fv(int location, int count, bool transpose, const GLfloat value[4][4])
+{
+#ifndef DXRENDERER
+#ifndef QT
+    glUniformMatrix4fv( location, count, transpose, &value[0][0] );
+#else
+    gRenderer->getShader()->program->setUniformValue( location, value );
+#endif
+#endif
+}
 
 
 void GLVertexPointer(GLint size, GLenum type, GLsizei stride, const GLvoid *pointer, const GLsizei count)
 {
     if( gRenderer->openGL2() )
     {
-        CCSetVertexAttribute( ATTRIB_VERTEX, size, type, stride, pointer, false, count );
+        gRenderer->GLVertexAttribPointer( ATTRIB_VERTEX, size, type, false, stride, pointer, count );
     }
     else
     {
@@ -635,7 +714,7 @@ void GLTexCoordPointer(GLint size, GLenum type, GLsizei stride, const GLvoid *po
 {
     if( gRenderer->openGL2() )
     {
-        CCSetVertexAttribute( ATTRIB_TEXCOORD, size, type, stride, pointer, false, 0 );
+        gRenderer->GLVertexAttribPointer( ATTRIB_TEXCOORD, size, type, false, stride, pointer, 0 );
     }
     else
     {
@@ -672,13 +751,6 @@ void GLColor4f(GLfloat r, GLfloat g, GLfloat b, GLfloat a)
 //    GLVertexAttribPointer( ATTRIB_COLOUR, 4, GL_FLOAT, true, 0, colours );
 }
 
-void CCSetVertexAttribute(const uint attribute,
-                          GLint size, GLenum type, GLsizei stride,
-                          const GLvoid *pointer, const bool normalized, const GLsizei count)
-{
-    GLVertexAttribPointer( attribute, size, type, normalized, stride, pointer, count );
-}
-
 void CCSetUniformVector3(const uint uniform,
                          const float x, const float y, const float z)
 {
@@ -690,7 +762,7 @@ void CCSetUniformVector3(const uint uniform,
         floats[1] = y;
         floats[2] = z;
 
-        GLUniform3fv( uniformLocation, 1, floats );
+        gRenderer->GLUniform3fv( uniformLocation, 1, floats );
     }
 }
 
@@ -707,51 +779,6 @@ void CCSetUniformVector4(const uint uniform,
         floats[2] = z;
         floats[3] = w;
 
-        GLUniform4fv( uniformLocation, 1, floats );
+        gRenderer->GLUniform4fv( uniformLocation, 1, floats );
     }
 }
-
-
-#ifndef DXRENDERER
-
-void GLVertexAttribPointer(uint index, int size, GLenum type, bool normalized, int stride, const void *pointer, const GLsizei count)
-{
-#ifndef QT
-    glVertexAttribPointer( index, size, type, normalized, stride, pointer );
-#else
-    gRenderer->getShader()->program->setAttributeArray( index, (const GLfloat*)pointer, size, stride );
-#endif
-}
-
-
-void GLUniform3fv(int location, int count, const GLfloat *value)
-{
-#ifndef QT
-    glUniform3fv( location, count, value );
-#else
-    gRenderer->getShader()->program->setUniformValue( location, value[0], value[1], value[2] );
-#endif
-}
-
-
-void GLUniform4fv(int location, int count, const GLfloat *value)
-{
-#ifndef QT
-    glUniform4fv( location, count, value );
-#else
-    gRenderer->getShader()->program->setUniformValue( location, value[0], value[1], value[2], value[3] );
-#endif
-}
-
-
-void GLUniformMatrix4fv(int location, int count, bool transpose, const GLfloat value[4][4])
-{
-#ifndef QT
-    glUniformMatrix4fv( location, count, transpose, &value[0][0] );
-#else
-    gRenderer->getShader()->program->setUniformValue( location, value );
-#endif
-}
-
-
-#endif

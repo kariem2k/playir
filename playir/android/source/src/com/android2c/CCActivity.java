@@ -73,9 +73,9 @@ public class CCActivity extends Activity
         this.setRequestedOrientation( ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE );
 
         app_name = this.getTitle().toString();
-        CCJNI.SetActivity( this );
-
         CookieSyncManager.createInstance( this );
+
+        CCJNI.SetActivity( this );
 
         {
 	        glView = new CCJNIGLView( getApplication() );

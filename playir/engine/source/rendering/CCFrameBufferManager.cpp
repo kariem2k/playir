@@ -297,7 +297,7 @@ void CCFrameBufferManager::bindFrameBuffer(const int fboIndex)
 #ifndef DXRENDERER
         glBindTexture( GL_TEXTURE_2D, getFrameBufferTexture( fboIndex ) );
         glTexImage2D( GL_TEXTURE_2D, 0, GL_RGBA, getWidth( fboIndex ), getHeight( fboIndex ), 0, GL_RGBA, GL_UNSIGNED_BYTE, 0 );
-        GLBindTexture( GL_TEXTURE_2D, gEngine->textureManager->getCurrentGLTexture() );
+        gRenderer->GLBindTexture( GL_TEXTURE_2D, gEngine->textureManager->getCurrentGLTexture() );
 #endif
     }
 }

@@ -131,24 +131,25 @@ private:
 public:
 	// Attempt to simulate OpenGL interface
     void GLClear(const bool colour);
-	void glViewport(const GLint x, const GLint y, const GLsizei width, const GLsizei height);
-	void glScissor(const GLint x, const GLint y, const GLsizei width, const GLsizei height);
-	void glEnable(const GLenum cap);
-	void glDisable(const GLenum cap);
+	void GLViewport(const GLint x, const GLint y, const GLsizei width, const GLsizei height);
+	void GLScissor(const GLint x, const GLint y, const GLsizei width, const GLsizei height);
+	void GLEnable(const GLenum cap);
+	void GLDisable(const GLenum cap);
 
-	void glCullFace(const GLenum mode);
+	void GLCullFace(const GLenum mode);
 
-	void glBindTexture(const GLenum mode, const CCTextureName *texture);
+	void GLBindTexture(const GLenum mode, const CCTextureName *texture);
 
-	void glDrawArrays(GLenum mode, GLint first, GLsizei count);
-	void glDrawElements(GLenum mode, GLsizei count, GLenum type, const void *indices);
+	void GLDrawArrays(GLenum mode, GLint first, GLsizei count);
+	void GLDrawElements(GLenum mode, GLsizei count, GLenum type, const void *indices);
 
-	void glVertexAttribPointer(uint index, int size, GLenum type, bool normalized, int stride, const void *pointer, const GLsizei count);
+	void GLVertexAttribPointer(uint index, int size, GLenum type, bool normalized, int stride, const void *pointer, const GLsizei count);
+
 	void updateVertexPointer(const uint index, const void *pointer);
 	void derefVertexPointer(const uint index, const void *pointer);
 
-	void glUniform4fv(int location, int count, const GLfloat *value);
-	void glUniformMatrix4fv(int location, int count, bool transpose, const GLfloat value[4][4]);
+	void GLUniform4fv(int location, int count, const GLfloat *value);
+	void GLUniformMatrix4fv(int location, int count, bool transpose, const GLfloat value[4][4]);
 
 	Microsoft::WRL::ComPtr<ID3D11Device1>& getDevice() { return m_d3dDevice; }
 };
