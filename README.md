@@ -1,32 +1,46 @@
 Description
 ===========
-PLAYIR is a real-time design and development engine that allows for the editing of source code, assets and designs in real-time.
-
+<dl>
+PLAYIR is a real-time design and development engine that allows for the editing of <br>source code, assets and designs in real&#8209;time.<br>
+For more information visit http://playir.com/<br><br>
 This repository contains the project files for building and deploying web, iOS, Android and Windows Phone apps.
+</dl>
 
 Android
-Eclipse > import projects > native
-native > android > source > ndk > debugbuild.sh - Debug build
-native > android > source > ndk > releasebuild.sh - Release build
-* Requires Android NDK
+------
+<dl>
+Eclipse > import projects > native<br>
+native > android > source > ndk > debugbuild.sh - Debug build<br>
+native > android > source > ndk > releasebuild.sh - Release build<br>
+* Requires Android NDK<br>
 http://www.youtube.com/watch?v=A41HuQiMnY8
+</dl>
 
 iOS
-native > ios > PLAYIR.xcodeproj
+------
+<dl>
+native > ios > PLAYIR.xcodeproj<br>
 http://www.youtube.com/watch?v=iatHLlmu6ds
+</dl>
 
 Web
-html5 > web > x > debug.html - Debug build
-html5 > web > x > index.html - Release build
+------
+<dl>
+html5 > web > x > debug.html - Debug build<br>
+html5 > web > x > index.html - Release build<br>
 * Requires PHP
+</dl>
 
 Windows Phone
+------
+<dl>
 native > windowsphone > PhoneXamlDirect3DApp.sln
-
-For more information visit http://playir.com/
+</dl>
 
 
 Licence
 =======
-This software is distributed under the Apache 2.0 license.
+<dl>
+This software is distributed under the Apache 2.0 license.<br>
 http://www.apache.org/licenses/LICENSE-2.0.html
+</dl>
