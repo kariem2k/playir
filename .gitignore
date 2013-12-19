@@ -1,5 +1,9 @@
 .DS_Store
+*.o
 Thumbs.db
+*.suo
+*.user*
+*.d
 
 */*/*.xcodeproj/project.xcworkspace/
 */*/*.xcodepro
